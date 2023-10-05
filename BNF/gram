@@ -1,0 +1,62 @@
+<results> ::= <block>
+
+<block> ::= "{" "sheets" ":" <sheets> "}"
+
+<sheets> ::= "[" "]" | "[" <sheets_sequence> "]"
+
+<sheets_sequence> ::= <sheet> | <sheet> "," <sheets_sequence>
+
+<sheet> ::= "{" <sheet_id> "," <sheet_data> "}"
+
+<sheet_id> ::= "id" ":" "sheet" "-" <digit> ","
+
+<sheet_data> ::= "data" ":" <cell_sequence>
+
+<cell_sequence> ::= "[" <cell> "," <cell_sequence> "]" | "[" "]" | "[" <cell> "]"
+
+<cell> ::= "[" <expr_sequence> "]"
+
+<func> ::=  "=" <func_type> "(" <expr_sequence> ")"
+<expr_sequence> ::= <expr_sequence> "," <expr> | <expr>
+<func_type> ::= "SUM" | "MULTIPLY" | "DIVIDE" | "GT" | "EQ" | "NOT" | "AND" | "OR" | "CONCAT"
+
+<expr> ::= <logical_expr>
+
+<logical_expr> ::= <relational_expr> | <func> | <relational_expr> | <logical_expr> "," <relational_expr> | <logical_expr> <relational_expr>
+
+<relational_expr> ::= <comparison_expr> | <comparison_expr> |<relational_expr>  <comparison_expr>
+
+<comparison_expr> ::= <arithmetic_expr> | <comparison_expr> ">" <arithmetic_expr> | <comparison_expr> ">=" <arithmetic_expr> | 
+										  <comparison_expr> "<" <arithmetic_expr> | <comparison_expr> ">=" <arithmetic_expr> 
+
+<arithmetic_expr> ::= <arithmetic_expr> "+" <factor> | <arithmetic_expr> "-" <factor> | <factor>
+
+<factor> ::= <factor> "*" <primary_expr> | <factor> "/" <primary_expr> | <factor> "%" <primary_expr> | <primary_expr>
+
+<primary_expr> ::= <literal>  | <bool> | <negate> | <identifier>
+
+<literal> ::= <integer> | <double> | <char_const> | <string> | <paren>
+
+<negate> ::= "-"<paren> | "-"<negate> | <primary_expr>
+
+<paren> ::= "(" <expr> ")"
+
+<string_content> ::= <string_content> <char> | <char>
+
+<identifier> ::= <letter> <digit>
+
+<double> ::= <integer> <decimal_fraction>
+
+<integer> ::= <number> | "-"<number>
+
+<decimal_fraction> ::= "."<number>
+
+<number> ::= <digit> | <number> <digit>
+
+<letter> ::= <upper_case_letter> | <lower_case_letter> 
+
+<bool> ::= "true" | "false"
+
+<upper_case_letter> ::= "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" 
+<lower_case_letter> ::= "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
+<digit> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"

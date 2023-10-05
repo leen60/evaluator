@@ -1,0 +1,82 @@
+digraph finite_state_machine {
+	fontname="Helvetica,Arial,sans-serif"
+	node [fontname="Helvetica,Arial,sans-serif"]
+	edge [fontname="Helvetica,Arial,sans-serif"]
+	rankdir=LR;
+	node [shape = circle]; START m u l p eq s d i r f v e a n c m o t y e q paren 0 1 2;
+	node [shape = doublecircle]; SUM, MULTIPLY, DIVIDE, AND, EQ, NOT, GT, OR, IF, CONCAT, INT, DOUBLE, STRING, INDENTIFIER, DEAD;
+
+	START -> INT [label = "[0-9]"];
+
+	INT -> INT [label = "[0-9]"];
+	INT -> DOUBLE [label = "'.'"];
+
+	START -> paren [label = "'"];
+	eq -> e [label = "'E'"];
+	e ->q [label = "'Q'"];
+	q -> EQ [label = "'('"];
+
+	eq -> i [label = "'I'"];
+	i -> f [label = "'F'"];
+	f->IF[label ="'('"];
+
+	eq -> o [label = "'O'"];
+	o -> r [label = "'R'"];
+	r -> OR [label = "'('"];
+
+	eq -> g [label = "G"];
+	g -> t [label = "T"];
+	t-> GT [label = "'('"];
+
+	START -> 0 [label = "'"];
+	0 ->0 [label = "([a-zA-Z0-9]|\[a-zA-Z])"];
+	0 -> STRING [label = "'"];
+
+	eq -> 2 [label = "[A-Z]"];
+	2 -> 1 [label = "[0-9]"];
+	1 -> 1 [label = "[0-9]"];
+	1 -> INDENTIFIER [label = "'"];
+
+	paren -> eq [label = "'='"]; 
+	eq -> s [label = "'S'"];
+	s -> u [label = "'U'"];
+	u -> m [label = "'M'"];
+	m -> SUM [label = "'('"];
+
+	eq -> c [label = "'C'"];
+	c -> o [label = "'O'"];
+	o -> n [label = "'N'"];
+	n -> c [label = "'C'"];
+	c -> a [label = "'A'"];
+	a -> t [label = "'T'"];
+	t  -> CONCAT [label = "'('"];
+
+	eq -> m [label = "'M'"];
+	m -> u [label = "'U'"];
+	u -> l [label = "'L'"];
+	l -> t [label = "'T'"];
+	t -> i [label = "'I'"];
+	i -> p [label = "'P'"];
+	p -> l [label = "'L'"];
+	l -> y [label = "'Y'"];
+	y -> MULTIPLY [label = "'('"];
+
+	eq -> d [label = "'D'"];
+	d -> i [label = "'I'"];
+	i -> v [label = "'V'"];
+	v -> i [label = "'I'"];
+	i -> d [label = "'D'"];
+	d -> e [label = "'E'"];
+	e -> DIVIDE [label = "'('"];
+
+	eq -> a [label = "'A'"];
+	a -> n [label = "'N'"];
+	n -> d [label = "'D'"];
+	d -> AND [label = "'('"];
+
+	eq -> n [label = "'N'"];
+	n -> o [label = "'O'"];
+	o -> t [label = "'T'"];
+	t -> NOT [label = "'('"];
+
+}
